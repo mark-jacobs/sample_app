@@ -24,8 +24,12 @@ group :test do
   gem 'growl', '1.0.3'
 end
 
+#ruby-gemset=railstutorial_rails_4_0
+gem 'bootstrap-sass', '2.3.2.0'
+gem 'sprockets'#, '2.11.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '4.0.1'
+gem 'sass', '3.2.17'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '2.1.1'
