@@ -15,10 +15,18 @@ describe "Authentication" do
     before { visit signin_path }
 
     describe "With invalid information" do
-      before { click_button "Sign in" }
-
-      it { should have_title('Sign in') }
-      it { should have_selector('div.alert.alert-error') }
+      let(:user) { FactoryGirl.create(:user) }
+        before do
+          fill_in "Email",      with: user.email.upcase + "xx"
+          fill_in "Password",   with: user.password + "xx"
+          click_button "Sign in"
+        end
+      
+        it { should have_title('Sign in') }
+        it { should have_selector('div.alert.alert-error') }
+        it { should_not have_link('Profile',   href: user_path(user)) }
+        it { should_not have_link('Settings',  href: edit_user_path(user)) }
+        it { should_not have_link('Sign out',  href: signout_path) }
 
       describe "After visiting another page" do
         before { click_link "Home" }
@@ -60,6 +68,7 @@ describe "Authentication" do
         describe "visiting the edit page" do
           before { visit edit_user_path(user) }
           it { should have_title('Sign in') }
+
         end
 
         describe "submitting to the update action" do
