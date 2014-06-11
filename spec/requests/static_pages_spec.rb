@@ -31,6 +31,10 @@ describe "Static pages" do
         user.feed.each do |item|
           expect(page).to have_selector("li##{item.id}", text: item.content)
         end
+      end   
+
+      it "should have the correct micropost count" do
+        expect(page).to have_content("#{user.feed.count} #{"micropost".pluralize}")
       end
     end
   end
